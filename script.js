@@ -98,11 +98,15 @@ document.body.append(h1Div, formDiv);
 btn[0].addEventListener("click", (e) => {
   e.preventDefault();
   const userBtn = document.getElementById("userid");
+  if (userBtn.value) {
+    fetchAPI(
+      `https://api.github.com/users/${userBtn.value}/repos`,
+      createRepoDom
+    );
+  } else {
+    alert("Please enter the user name first");
+  }
 
-  fetchAPI(
-    `https://api.github.com/users/${userBtn.value}/repos`,
-    createRepoDom
-  );
   userBtn.value = "";
   userBtn.blur();
 });
